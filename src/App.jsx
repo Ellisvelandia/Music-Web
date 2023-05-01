@@ -1,8 +1,8 @@
-import { Home } from "./screens";
+import Home from "./screens/home/Home";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-body">
       <Home />
     </div>
   );

@@ -31,12 +31,18 @@ const Home = () => {
     }
   }, []);
 
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    setToken("");
+  }
+
   return !token ? (
     <Login />
   ) : (
     <BrowserRouter>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar handleLogout={handleLogout}/>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route exact path="/" element={<Library />} />

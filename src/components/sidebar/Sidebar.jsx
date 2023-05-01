@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import SidebarButton from "./SidebarButton";
 import { MdFavorite, MdSpaceDashboard } from "react-icons/md";
@@ -6,14 +7,13 @@ import { IoLibrary } from "react-icons/io5";
 import "./sidebar.css";
 import apiClient from "../../spotify";
 
-const Sidebar = () => {
+const Sidebar = ({ handleLogout }) => {
   const [image, setImage] = useState(
     "https://i.pinimg.com/736x/fb/3d/43/fb3d437f3f49ef0fa435a3394227d341.jpg"
   );
 
   useEffect(() => {
     apiClient.get("me").then((res) => {
-      // console.log(res)
       setImage(res.data.images[0].url);
     });
   }, []);
@@ -32,7 +32,9 @@ const Sidebar = () => {
         />
         <SidebarButton title="Library" to="/" icon={<IoLibrary />} />
       </div>
-      <SidebarButton title="Sign Out" to="" icon={<FaSignOutAlt />} />
+      <button className="btn-logout" onClick={handleLogout}>
+        <FaSignOutAlt />
+      </button>
     </div>
   );
 };
